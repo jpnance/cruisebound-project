@@ -1,12 +1,21 @@
 import type { NextPage } from 'next'
-import sailings from '../data/sailings.json'
+import { useState, useEffect } from 'react'
+import SearchResults from '../components/SearchResults'
 
 const Home: NextPage = () => {
+	const [results, setResults] = useState([])
+
+	useEffect(() => {
+		fetch('https://sandbox.cruisebound-qa.com/sailings')
+			.then((response) => response.json())
+			.then((response) => setResults(response.results))
+
+		return () => {}
+	}, [])
+
 	return (
 		<div className="flex min-h-screen flex-col items-center justify-center py-2">
-			{sailings.results.map((sailing, i) => {
-				return <h1 key={i}>{sailing.name}</h1>
-			})}
+			<SearchResults results={results} />
 		</div>
    )
 }
