@@ -1,9 +1,13 @@
-import SailingCard from './SailingCard'
+import SailingCard, { Sailing } from './SailingCard'
 
-const SearchResults = (props) => {
+type SearchResultsProps = {
+	results: Sailing[];
+};
+
+const SearchResults = ({ results }: SearchResultsProps) => {
 	return (
 		<div>
-			{props.results.map((result, i) => <SailingCard key={`result-${i}`} sailing={result} /> )}
+			{results.map((result, i) => <SailingCard key={`result-${i}`} sailing={result} /> )}
 		</div>
 	)
 }
