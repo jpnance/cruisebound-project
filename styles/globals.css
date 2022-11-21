@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+	.rounded-clip-path {
+		clip-path: inset(0% 100% 0% 100% round 10px);
+	}
+}
