@@ -1,3 +1,5 @@
+import React from 'react'
+
 export type Sailing = {
 	price: number;
 	name: string;
@@ -47,10 +49,10 @@ const SailingCard = ({ sailing }: SailingCardProps) => {
 							<div className="flex flex-wrap my-2 gap-x-2 items-center">
 								{sailing.itinerary.map((port, i) => {
 									return (
-										<>
-											<div className="text-xs md:text-sm text-gray-700" key={`itinerary-${i}`}>{port.split(',')[0]}</div>
+										<React.Fragment key={`itinerary-${i}`}>
+											<div className="text-xs md:text-sm text-gray-700">{port.split(',')[0]}</div>
 											{i < sailing.itinerary.length - 1 ? <div className="text-blue-500">⭢</div> : null}
-										</>
+										</React.Fragment>
 									)
 								})}
 							</div>
