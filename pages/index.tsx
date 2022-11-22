@@ -19,9 +19,14 @@ const Home: NextPage = () => {
 	}, [])
 
 	return (
-		<div className="flex mx-2 min-h-screen flex-col items-start justify-center py-2">
-			<SearchResults results={results.slice(pageIndex * resultsPerPage, pageIndex * resultsPerPage + resultsPerPage)} />
-			<Pagination totalPages={Math.ceil(results.length / resultsPerPage)} currentPageIndex={pageIndex} setPageIndex={setPageIndex} />
+		<div className="flex min-h-screen">
+			<div className="p-2 mx-2 my-2 bg-slate-800 text-white">
+				Here's where some filter stuff will go.
+			</div>
+			<div className="flex m-2 flex-col items-start justify-center">
+				<SearchResults results={results.slice(pageIndex * resultsPerPage, pageIndex * resultsPerPage + resultsPerPage)} />
+				<Pagination totalPages={Math.ceil(results.length / resultsPerPage)} currentPageIndex={pageIndex} setPageIndex={setPageIndex} />
+			</div>
 		</div>
    )
 }
