@@ -5,9 +5,10 @@ import Filter from './Filter'
 type FiltersProps = {
 	allResults: Sailing[];
 	setFilteredResults: (filteredResults: Sailing[]) => void;
+	resetPagination: () => void;
 }
 
-const Filters = ({ allResults, setFilteredResults }: FiltersProps) => {
+const Filters = ({ allResults, setFilteredResults, resetPagination }: FiltersProps) => {
 	const [collapsed, setCollapsed] = useState(true)
 
 	const [departurePortFilter, setDeparturePortFilter] = useState('')
@@ -43,7 +44,8 @@ const Filters = ({ allResults, setFilteredResults }: FiltersProps) => {
 			filteredResults = filteredResults.filter((sailing) => sailing.ship.line.name.toLowerCase().startsWith(cruiselineFilter.toLowerCase()))
 		}
 
-		setFilteredResults(filteredResults);
+		setFilteredResults(filteredResults)
+		resetPagination()
 	}
 
 	let resetFilters = () => {
