@@ -25,19 +25,19 @@ export type SailingCardProps = {
 const SailingCard = ({ sailing }: SailingCardProps) => {
 	return (
 		<div className="drop-shadow-md">
-			<div className="my-2 flex rounded-clip-path">
-				<div className="w-72">
+			<div className="my-4 flex flex-col md:flex-row rounded-clip-path">
+				<div className="h-32 md:h-auto md:w-72">
 					<img className="w-full h-full object-cover" src={sailing.ship.image} />
 				</div>
 				<div className="flex flex-col w-full bg-white">
 					<div className="flex grow p-4">
 						<div className="grow">
-							<div className="text-xl font-bold">{sailing.name}</div>
-							<div className="flex gap-4">
+							<div className="text-sm md:text-xl font-bold">{sailing.name}</div>
+							<div className="text-xs md:text-sm flex flex-col gap-2 md:flex-row md:gap-4">
 								<div className="text-gray-700">{sailing.region}</div>
 								<div className="text-gray-700">{sailing.duration} nights</div>
 								<div className="flex gap-2 items-center">
-									<div className="text-md">
+									<div className="md:text-md">
 										<span className="text-yellow-400">★</span>
 										<span className="font-bold">{sailing.ship.rating}</span>
 									</div>
@@ -48,7 +48,7 @@ const SailingCard = ({ sailing }: SailingCardProps) => {
 								{sailing.itinerary.map((port, i) => {
 									return (
 										<>
-											<div className="text-sm text-gray-700" key={`itinerary-${i}`}>{port.split(',')[0]}</div>
+											<div className="text-xs md:text-sm text-gray-700" key={`itinerary-${i}`}>{port.split(',')[0]}</div>
 											{i < sailing.itinerary.length - 1 ? <div className="text-blue-500">➜</div> : null}
 										</>
 									)
@@ -57,7 +57,7 @@ const SailingCard = ({ sailing }: SailingCardProps) => {
 						</div>
 						<div className="flex flex-col items-end">
 							<img className="max-h-8 max-w-[8rem]" src={sailing.ship.line.logo} />
-							<div className="text-gray-500 text-xs my-1">{sailing.ship.name}</div>
+							<div className="text-right text-gray-500 text-xs my-1">{sailing.ship.name}</div>
 						</div>
 					</div>
 					<div className="flex justify-end p-4 bg-slate-100">
