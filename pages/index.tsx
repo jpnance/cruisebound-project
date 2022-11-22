@@ -18,6 +18,15 @@ const Home: NextPage = () => {
 		return () => {}
 	}, [])
 
+	let changePageIndex = (newPageIndex: number) => {
+		if (newPageIndex < 0 || newPageIndex >= Math.ceil(results.length / resultsPerPage)) {
+			return;
+		}
+		else {
+			setPageIndex(newPageIndex);
+		}
+	}
+
 	return (
 		<div className="flex min-h-screen">
 			<div className="p-2 mx-2 my-2 bg-slate-800 text-white">
@@ -25,7 +34,7 @@ const Home: NextPage = () => {
 			</div>
 			<div className="flex m-2 flex-col items-start justify-center">
 				<SearchResults results={results.slice(pageIndex * resultsPerPage, pageIndex * resultsPerPage + resultsPerPage)} />
-				<Pagination totalPages={Math.ceil(results.length / resultsPerPage)} currentPageIndex={pageIndex} setPageIndex={setPageIndex} />
+				<Pagination totalPages={Math.ceil(results.length / resultsPerPage)} currentPageIndex={pageIndex} changePageIndex={changePageIndex} />
 			</div>
 		</div>
    )
