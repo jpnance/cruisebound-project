@@ -49,7 +49,7 @@ const SailingCard = ({ sailing }: SailingCardProps) => {
 									return (
 										<>
 											<div className="text-xs md:text-sm text-gray-700" key={`itinerary-${i}`}>{port.split(',')[0]}</div>
-											{i < sailing.itinerary.length - 1 ? <div className="text-blue-500">➜</div> : null}
+											{i < sailing.itinerary.length - 1 ? <div className="text-blue-500">⭢</div> : null}
 										</>
 									)
 								})}

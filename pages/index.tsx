@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import { useState, useEffect } from 'react'
+import Filters from '../components/Filters'
 import SearchResults from '../components/SearchResults'
 import Pagination from '../components/Pagination'
 import { Sailing } from '../components/SailingCard'
@@ -28,9 +29,9 @@ const Home: NextPage = () => {
 	}
 
 	return (
-		<div className="flex flex-col md:flex-row min-h-screen justify-center">
-			<div className="p-2 mx-2 my-2 bg-slate-800 text-white">
-				Here's where some filter stuff will go.
+		<div className="flex flex-col lg:flex-row min-h-screen justify-center">
+			<div className="p-4 mx-2 my-2 bg-slate-800 text-white">
+				<Filters />
 			</div>
 			<div className="flex m-2 flex-col items-start justify-center max-w-4xl">
 				<SearchResults results={results.slice(pageIndex * resultsPerPage, pageIndex * resultsPerPage + resultsPerPage)} />
