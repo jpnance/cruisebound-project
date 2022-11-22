@@ -10,7 +10,7 @@ type FiltersProps = {
 const Filters = ({ allResults, setFilteredResults }: FiltersProps) => {
 	const [collapsed, setCollapsed] = useState(true)
 
-	const [departurePortFilter, setPortFilter] = useState('')
+	const [departurePortFilter, setDeparturePortFilter] = useState('')
 	const [dateFilter, setDateFilter] = useState('')
 	const [durationFilter, setDurationFilter] = useState('')
 	const [cruiselineFilter, setCruiselineFilter] = useState('')
@@ -22,13 +22,35 @@ const Filters = ({ allResults, setFilteredResults }: FiltersProps) => {
 			filteredResults = filteredResults.filter((sailing) => sailing.itinerary[0]?.toLowerCase().startsWith(departurePortFilter.toLowerCase()))
 		}
 
+		if (dateFilter !== '') {
+			let dateFilterObject = new Date(dateFilter)
+
+			filteredResults = filteredResults.filter((sailing) => {
+				let departureDateObject = new Date(sailing.departureDate)
+				let returnDateObject = new Date(sailing.returnDate)
+
+				return departureDateObject <= dateFilterObject && dateFilterObject <= returnDateObject
+			})
+		}
+
 		if (durationFilter !== '') {
 			let durationNumber = parseInt(durationFilter)
 
 			filteredResults = filteredResults.filter((sailing) => sailing.duration === durationNumber)
 		}
 
+		if (cruiselineFilter !== '') {
+			filteredResults = filteredResults.filter((sailing) => sailing.ship.line.name.toLowerCase().startsWith(cruiselineFilter.toLowerCase()))
+		}
+
 		setFilteredResults(filteredResults);
+	}
+
+	let resetFilters = () => {
+		setDeparturePortFilter('')
+		setDateFilter('')
+		setDurationFilter('')
+		setCruiselineFilter('')
 	}
 
 	return (
@@ -44,11 +66,12 @@ const Filters = ({ allResults, setFilteredResults }: FiltersProps) => {
 				</div>
 			</div>
 			<div className={`flex flex-col gap-8 ${collapsed ? 'hidden' : ''}`}>
-				<Filter title="Departure port" type="text" placeholder="Any port" handleChange={setPortFilter} />
-				<Filter title="Dates" type="date" handleChange={setDateFilter} />
-				<Filter title="Duration" type="text" placeholder="Any duration" handleChange={setDurationFilter} />
-				<Filter title="Cruiseline" type="text" placeholder="Any ship" handleChange={setCruiselineFilter} />
+				<Filter title="Departure port" type="text" placeholder="Any port" value={departurePortFilter} handleChange={setDeparturePortFilter} />
+				<Filter title="Dates" type="date" value={dateFilter} handleChange={setDateFilter} />
+				<Filter title="Duration" type="text" placeholder="Any duration" value={durationFilter} handleChange={setDurationFilter} />
+				<Filter title="Cruiseline" type="text" placeholder="Any ship" value={cruiselineFilter} handleChange={setCruiselineFilter} />
 				<button onClick={(event) => filterResults()}>Search</button>
+				<button onClick={(event) => resetFilters()}>Reset Filters</button>
 			</div>
 		</div>
 	)
