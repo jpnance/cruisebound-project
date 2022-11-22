@@ -32,21 +32,32 @@ const SailingCard = ({ sailing }: SailingCardProps) => {
 				<div className="flex flex-col w-full bg-white">
 					<div className="flex grow p-4">
 						<div className="grow">
-							<div className="text-lg font-bold">{sailing.name}</div>
-							<div className="flex gap-2">
-								<div>{sailing.region}</div>
-								<div>{sailing.duration} nights</div>
-								<div>{sailing.ship.rating} {sailing.ship.reviews} reviews</div>
+							<div className="text-xl font-bold">{sailing.name}</div>
+							<div className="flex gap-4">
+								<div className="text-gray-700">{sailing.region}</div>
+								<div className="text-gray-700">{sailing.duration} nights</div>
+								<div className="flex gap-2 items-center">
+									<div className="text-md">
+										<span className="text-yellow-400">★</span>
+										<span className="font-bold">{sailing.ship.rating}</span>
+									</div>
+									<div className="text-xs text-gray-500">{sailing.ship.reviews} reviews</div>
+								</div>
 							</div>
-							<div className="flex flex-wrap gap-x-2">
+							<div className="flex flex-wrap my-2 gap-x-2 items-center">
 								{sailing.itinerary.map((port, i) => {
-									return <div key={`itinerary-${i}`}>{port.split(',')[0]}</div>
+									return (
+										<>
+											<div className="text-sm text-gray-700" key={`itinerary-${i}`}>{port.split(',')[0]}</div>
+											{i < sailing.itinerary.length - 1 ? <div className="text-blue-500">➜</div> : null}
+										</>
+									)
 								})}
 							</div>
 						</div>
 						<div className="flex flex-col items-end">
 							<img className="max-h-8 max-w-[8rem]" src={sailing.ship.line.logo} />
-							<div>{sailing.ship.name}</div>
+							<div className="text-gray-500 text-xs my-1">{sailing.ship.name}</div>
 						</div>
 					</div>
 					<div className="flex justify-end p-4 bg-slate-100">

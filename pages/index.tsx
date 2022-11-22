@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import { useState, useEffect } from 'react'
 import SearchResults from '../components/SearchResults'
 import Pagination from '../components/Pagination'
+import { Sailing } from '../components/SailingCard'
 
 const Home: NextPage = () => {
 	const resultsPerPage = 10
@@ -12,7 +13,7 @@ const Home: NextPage = () => {
 	useEffect(() => {
 		fetch('https://sandbox.cruisebound-qa.com/sailings')
 			.then((response) => response.json())
-			.then((response) => setResults(response.results.sort((a, b) => a.price - b.price)))
+			.then((response) => setResults(response.results.sort((a: Sailing, b: Sailing) => a.price - b.price)))
 
 		return () => {}
 	}, [])
