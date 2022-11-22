@@ -25,7 +25,7 @@ export type SailingCardProps = {
 const SailingCard = ({ sailing }: SailingCardProps) => {
 	return (
 		<div className="drop-shadow-md">
-			<div className="m-2 flex rounded-clip-path">
+			<div className="my-2 flex rounded-clip-path">
 				<div className="w-72">
 					<img className="w-full h-full object-cover" src={sailing.ship.image} />
 				</div>
