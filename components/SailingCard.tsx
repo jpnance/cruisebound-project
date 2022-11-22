@@ -56,7 +56,7 @@ const SailingCard = ({ sailing }: SailingCardProps) => {
 							</div>
 						</div>
 						<div className="flex flex-col items-end">
-							<img className="max-h-8 max-w-[8rem]" src={sailing.ship.line.logo} />
+							<img className="max-h-8 max-w-[4rem] md:max-w-[8rem]" src={sailing.ship.line.logo} />
 							<div className="text-right text-gray-500 text-xs my-1">{sailing.ship.name}</div>
 						</div>
 					</div>
