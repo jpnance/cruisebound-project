@@ -2,22 +2,16 @@ type FilterProps = {
 	title: string;
 	type: string;
 	placeholder?: string;
+	handleChange: (newValue: string) => void;
 }
 
-const Filter = ({ title, type, placeholder }: FilterProps) => {
+const Filter = ({ title, type, placeholder, handleChange }: FilterProps) => {
 	let inputElement;
-
-	if (type === 'text') {
-		inputElement = <input className="rounded-md p-2 mt-1 text-black w-full" type="text" placeholder={placeholder} />
-	}
-	else if (type === 'date') {
-		inputElement = <input className="rounded-md p-2 mt-1 text-black w-full" type="date" />
-	}
 
 	return (
 		<div>
 			<div className="text-gray-300">{title}</div>
-			{inputElement}
+			<input className="rounded-md p-2 mt-1 text-black w-full" type={type} placeholder={placeholder} onChange={(event) => handleChange(event.target.value)} />
 		</div>
 	)
 			

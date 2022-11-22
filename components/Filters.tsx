@@ -1,8 +1,35 @@
 import { useState } from 'react'
+import { Sailing } from '../components/SailingCard'
 import Filter from './Filter'
 
-const Filters = () => {
+type FiltersProps = {
+	allResults: Sailing[];
+	setFilteredResults: (filteredResults: Sailing[]) => void;
+}
+
+const Filters = ({ allResults, setFilteredResults }: FiltersProps) => {
 	const [collapsed, setCollapsed] = useState(true)
+
+	const [departurePortFilter, setPortFilter] = useState('')
+	const [dateFilter, setDateFilter] = useState('')
+	const [durationFilter, setDurationFilter] = useState('')
+	const [cruiselineFilter, setCruiselineFilter] = useState('')
+
+	let filterResults = () => {
+		let filteredResults = allResults.slice()
+
+		if (departurePortFilter !== '') {
+			filteredResults = filteredResults.filter((sailing) => sailing.itinerary[0]?.toLowerCase().startsWith(departurePortFilter.toLowerCase()))
+		}
+
+		if (durationFilter !== '') {
+			let durationNumber = parseInt(durationFilter)
+
+			filteredResults = filteredResults.filter((sailing) => sailing.duration === durationNumber)
+		}
+
+		setFilteredResults(filteredResults);
+	}
 
 	return (
 		<div className="text-sm md:text-md flex flex-col gap-8">
@@ -17,10 +44,11 @@ const Filters = () => {
 				</div>
 			</div>
 			<div className={`flex flex-col gap-8 ${collapsed ? 'hidden' : ''}`}>
-				<Filter title="Departure port" type="text" placeholder="Any port" />
-				<Filter title="Dates" type="date" />
-				<Filter title="Duration" type="text" placeholder="Any duration" />
-				<Filter title="Cruiseline" type="text" placeholder="Any ship" />
+				<Filter title="Departure port" type="text" placeholder="Any port" handleChange={setPortFilter} />
+				<Filter title="Dates" type="date" handleChange={setDateFilter} />
+				<Filter title="Duration" type="text" placeholder="Any duration" handleChange={setDurationFilter} />
+				<Filter title="Cruiseline" type="text" placeholder="Any ship" handleChange={setCruiselineFilter} />
+				<button onClick={(event) => filterResults()}>Search</button>
 			</div>
 		</div>
 	)
