@@ -25,10 +25,45 @@ export type SailingCardProps = {
 }
 
 const SailingCard = ({ sailing }: SailingCardProps) => {
+	let cardDate = (departureDate, returnDate) => {
+		let returnString = ''
+
+		let departureDateObject = new Date(departureDate)
+		let returnDateObject = new Date(returnDate)
+
+		let niceMonth = (monthIndex) => {
+			switch (monthIndex) {
+				case 0: return 'Jan'
+				case 1: return 'Feb'
+				case 2: return 'Mar'
+				case 3: return 'Apr'
+				case 4: return 'May'
+				case 5: return 'Jun'
+				case 6: return 'Jul'
+				case 7: return 'Aug'
+				case 8: return 'Sep'
+				case 9: return 'Oct'
+				case 10: return 'Nov'
+				case 11: return 'Dec'
+			}
+		}
+
+		returnString += `${niceMonth(departureDateObject.getMonth())} ${departureDateObject.getDate()}-`
+
+		if (departureDateObject.getMonth() != returnDateObject.getMonth()) {
+			returnString += `${niceMonth(returnDateObject.getMonth())} `
+		}
+
+		returnString += `${returnDateObject.getDate()}, ${returnDateObject.getFullYear()}`
+
+		return returnString
+	}
+
 	return (
 		<div className="drop-shadow-md">
 			<div className="my-4 flex flex-col md:flex-row rounded-clip-path">
-				<div className="h-32 md:h-auto md:w-72">
+				<div className="h-32 md:h-auto md:w-96">
+					<div className="absolute text-white text-sm bg-black/75 px-8 py-1 top-2 left-2 rounded-md">{cardDate(sailing.departureDate, sailing.returnDate)}</div>
 					<img className="w-full h-full object-cover" src={sailing.ship.image} />
 				</div>
 				<div className="flex flex-col w-full bg-white">
