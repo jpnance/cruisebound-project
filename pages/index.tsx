@@ -33,6 +33,7 @@ const Home: NextPage = () => {
 		}
 		else {
 			setPageIndex(newPageIndex);
+			window.scroll({ top: 0, behavior: 'smooth' })
 		}
 	}
 
