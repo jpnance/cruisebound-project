@@ -72,8 +72,8 @@ const Filters = ({ allResults, setFilteredResults, resetPagination }: FiltersPro
 				<Filter title="Dates" type="date" value={dateFilter} handleChange={setDateFilter} />
 				<Filter title="Duration" type="text" placeholder="Any duration" value={durationFilter} handleChange={setDurationFilter} />
 				<Filter title="Cruiseline" type="text" placeholder="Any ship" value={cruiselineFilter} handleChange={setCruiselineFilter} />
-				<button onClick={(event) => filterResults()}>Search</button>
-				<button onClick={(event) => resetFilters()}>Reset Filters</button>
+				<button className="bg-slate-600 hover:bg-slate-500 rounded-md p-4" onClick={(event) => filterResults()}>Search</button>
+				<button className="bg-slate-600 hover:bg-slate-500 rounded-md p-4" onClick={(event) => resetFilters()}>Reset Filters</button>
 			</div>
 		</div>
 	)
