@@ -25,13 +25,13 @@ export type SailingCardProps = {
 }
 
 const SailingCard = ({ sailing }: SailingCardProps) => {
-	let cardDate = (departureDate, returnDate) => {
+	let cardDate = (departureDate: string, returnDate: string) => {
 		let returnString = ''
 
 		let departureDateObject = new Date(departureDate)
 		let returnDateObject = new Date(returnDate)
 
-		let niceMonth = (monthIndex) => {
+		let niceMonth = (monthIndex: number) => {
 			switch (monthIndex) {
 				case 0: return 'Jan'
 				case 1: return 'Feb'
