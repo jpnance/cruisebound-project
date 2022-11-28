@@ -4,6 +4,6 @@
 
 @layer utilities {
 	.rounded-clip-path {
-		clip-path: inset(0% 100% 0% 100% round 10px);
+		clip-path: inset(0px round 10px);
 	}
 }
